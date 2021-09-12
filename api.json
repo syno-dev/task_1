@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "task api",
+        "description": "simple api with db and calculating service"
+    },
+    "paths": {
+        "/health": {
+            "get": {
+                "description": "Healthcheck",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "descrption": "says that API is alive"
+                    }
+                }
+            }
+        },
+        "/calculate/{name}": {
+            "get": {
+                "description": "calculates avg and sum values of given $name",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of data point",
+                        "type": "string"
+                    },
+                    {
+                        "name": "from",
+                        "in": "params",
+                        "required": false,
+                        "description": "(optional) first value of time range"
+                    },
+                    {
+                        "name": "to",
+                        "in": "params",
+                        "required": false,
+                        "description": "(optional) second value of time range"
+                    }
+                ]
+            }
+        },
+        "/input": {
+            "post": {
+                "description": "accepts new data",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "body",
+                        "description": "name of data point",
+                        "required": true
+                    },
+                    {
+                        "name": "t",
+                        "in": "body",
+                        "description": "timestamp as epoch",
+                        "required": true
+                    },
+                    {
+                        "name": "v",
+                        "in": "body",
+                        "description": "value",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    }
+}
